@@ -14,6 +14,7 @@ class PokedexPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Center(
         child: Text('FlutterDex')
         ),
@@ -31,10 +32,7 @@ class PokedexPage extends StatelessWidget {
             );
           } else {
             final pokemons = snapshot.data
-                .where((pokemon) {
-              debugPrint('debug pokemon ${pokemon.urlImage}');
-            return pokemon.urlImage != null && pokemon.urlImage.length > 0;}).toList();
-
+                .where((pokemon) => pokemon.urlImage != null && pokemon.urlImage.length > 0).toList();
 
             return _PokemonList(
               pokemons: pokemons,
@@ -84,19 +82,19 @@ class _PokemonTileState extends State<_PokemonTile> {
   Widget build(BuildContext context) {
     return ListTile(
       leading: SizedBox(
-        width: 100,
+        width: 56,
         height: 56,
         child: CachedNetworkImage(
           placeholder: (context, url) => Container(
             color: Colors.black12,
           ),
           imageUrl: widget.pokemon.urlImage,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
       ),
-      title: Text(widget.pokemon.name),
+      title: Text('#${widget.pokemon.numId} ${widget.pokemon.name}'),
       trailing: IconButton(
-        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+        icon: Icon(isFavorite ? Icons.lens : Icons.adjust),
         onPressed: () {
           setState(() {
             isFavorite = !isFavorite;
