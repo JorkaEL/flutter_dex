@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dex/model/pokemon.dart';
+import 'package:flutter_dex/ui/pokedex/pokemon_detail_page.dart';
+import 'package:flutter_dex/util/routing_constants.dart';
 
 class PokemonTitle extends StatefulWidget {
   PokemonTitle({
@@ -41,6 +43,7 @@ class _PokemonTitleState extends State<PokemonTitle> {
           });
         },
       ),
+      onTap: () => Navigator.pushNamed(context, PokemonDetailPageRoute, arguments: widget.pokemon)
     );
   }
 }
